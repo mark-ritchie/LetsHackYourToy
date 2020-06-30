@@ -1,0 +1,10 @@
+#controls input{
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+body{
+    margin: 12px 24px;
+}
+
