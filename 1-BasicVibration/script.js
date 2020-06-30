@@ -1,17 +1,19 @@
 var client = null;
 var devices = [];
 
-document.getElementById("button-sync").addEventListener("click", async (ev) => {
+document.getElementById("button-sync").addEventListener("click", async (ev) => {    
+    if (client === null) {
+        client = new Buttplug.ButtplugClient("ButtplugClient");
 
-    client = new Buttplug.ButtplugClient("ButtplugClient");
-
-    try {
-        const connector = new Buttplug.ButtplugEmbeddedClientConnector();
-        await client.Connect(connector);
-    } catch (e) {
-        console.log(e);
-        return;
+        try {
+            const connector = new Buttplug.ButtplugEmbeddedClientConnector();
+            await client.Connect(connector);
+        } catch (e) {
+            console.log(e);
+            return;
+        }
     }
+
     client.addListener('deviceadded', async (device) => {
         await client.StopScanning();
         document.getElementById("toys-available").innerText = "";
